@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+<style>
+			:root{--bg:#f6f8fa;--card:#fff;--muted:#6b7280;--accent:#0b74ff}
+			body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);margin:0;color:#111}
+			.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:36px}
+			.card{width:100%;max-width:520px;background:var(--card);padding:28px;border-radius:10px;box-shadow:0 8px 24px rgba(16,24,40,.08)}
+			h1{margin:0 0 6px;font-size:22px}
+			p.lead{margin:0 0 18px;color:var(--muted)}
+
+			.field{margin-bottom:12px}
+			.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+			label{display:block;font-size:13px;margin-bottom:6px;font-weight:600}
+			input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select{width:100%;padding:10px 12px;border:1px solid #e6e9ef;border-radius:6px;background:#fbfdff}
+			.muted{color:var(--muted);font-size:13px;margin-bottom:10px}
+
+			.checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+			.chk{display:flex;align-items:center;gap:8px}
+			.chk input{width:16px;height:16px}
+
+			.section-title{margin-top:14px;margin-bottom:8px;font-weight:700}
+
+			.btn{display:inline-block;margin-top:16px;background:var(--accent);color:#fff;padding:10px 18px;border-radius:6px;border:0;cursor:pointer;font-weight:600}
+
+			.error{color:#b91c1c;font-size:13px;margin-top:6px}
+
+			@media (max-width:560px){.grid{grid-template-columns:1fr}}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<form id="eventForm" class="card" action="#" method="post">
+				<h1>Event Registration Form</h1>
+				<p class="lead">Please fill out the form below to register for the event.</p>
+
+				<div class="grid">
+					<div class="field">
+						<label for="first">First Name</label>
+						<input id="first" name="first" type="text" placeholder="John" required />
+					</div>
+					<div class="field">
+						<label for="last">Last Name</label>
+						<input id="last" name="last" type="text" placeholder="Doe" required />
+					</div>
+				</div>
+
+				<div class="field">
+					<label for="email">Email Address</label>
+					<input id="email" name="email" type="email" placeholder="john.doe@example.com" required />
+				</div>
+
+				<div class="field">
+					<label for="phone">Phone Number</label>
+					<input id="phone" name="phone" type="tel" placeholder="+1 (555) 123-4567" />
+				</div>
+
+				<div class="grid">
+					<div class="field">
+						<label for="country">Country</label>
+						<select id="country" name="country" required>
+							<option value="">Select Country</option>
+							<option value="US">United States</option>
+							<option value="ID">Indonesia</option>
+							<option value="GB">United Kingdom</option>
+							<option value="AU">Australia</option>
+						</select>
+					</div>
+					<div class="field">
+						<label for="dob">Date of Birth</label>
+						<input id="dob" name="dob" type="date" placeholder="MM/DD/YYYY" />
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="section-title">T-Shirt Size</div>
+					<div class="checkbox-grid">
+						<label class="chk"><input type="checkbox" name="tshirt" value="Small"> Small</label>
+						<label class="chk"><input type="checkbox" name="tshirt" value="Medium"> Medium</label>
+						<label class="chk"><input type="checkbox" name="tshirt" value="Large"> Large</label>
+						<label class="chk"><input type="checkbox" name="tshirt" value="Extra Large"> Extra Large</label>
+					</div>
+				</div>
+
+				<div class="section-title">Emergency Contact Information</div>
+
+				<div class="field">
+					<label for="emName">Emergency Contact Name</label>
+					<input id="emName" name="emName" type="text" placeholder="Jane Smith" required />
+				</div>
+
+				<div class="field">
+					<label for="emPhone">Emergency Contact Phone Number</label>
+					<input id="emPhone" name="emPhone" type="tel" placeholder="+1 (555) 123-4567" required />
+				</div>
+
+				<div class="field">
+					<label class="chk"><input id="terms" name="terms" type="checkbox" required> I agree to the terms and conditions of this event.</label>
+				</div>
+
+				<div id="formError" class="error" role="alert" aria-live="polite" style="display:none"></div>
+
+				<button type="submit" class="btn">Register Now</button>
+			</form>
+		</div>
+
+		<script>
+			(function(){
+				const form = document.getElementById('eventForm');
+				const errorEl = document.getElementById('formError');
+
+				function showError(msg){
+					errorEl.textContent = msg;
+					errorEl.style.display = 'block';
+				}
+
+				function clearError(){
+					errorEl.textContent = '';
+					errorEl.style.display = 'none';
+				}
+
+				form.addEventListener('submit', function(e){
+					e.preventDefault();
+					clearError();
+
+					// Simple validation (HTML required takes care of basics)
+					const first = form.first.value.trim();
+					const last = form.last.value.trim();
+					const email = form.email.value.trim();
+					const country = form.country.value;
+					const emName = form.emName.value.trim();
+					const emPhone = form.emPhone.value.trim();
+					const terms = form.terms.checked;
+
+					if(!first || !last || !email){
+						showError('Please fill in your full name and email.');
+						return;
+					}
+					if(!country){
+						showError('Please select your country.');
+						return;
+					}
+					if(!emName || !emPhone){
+						showError('Please provide emergency contact name and phone.');
+						return;
+					}
+					if(!terms){
+						showError('You must agree to the terms and conditions.');
+						return;
+					}
+
+					// collect tshirt sizes (multiple possible)
+					const tshirtNodes = form.querySelectorAll('input[name="tshirt"]:checked');
+					const tshirt = Array.from(tshirtNodes).map(n => n.value);
+
+					const data = {
+						first, last, email,
+						phone: form.phone.value.trim(),
+						country, dob: form.dob.value,
+						tshirt, emergency: { name: emName, phone: emPhone }
+					};
+
+					// show result in console and a simple alert for demo
+					console.log('Registration data:', data);
+					alert('Registration successful!\nCheck console for submitted data.');
+
+					// OPTIONAL: send to server (uncomment and replace URL)
+					/*
+					fetch('https://example.com/api/register', {
+						method: 'POST',
+						headers: {'Content-Type':'application/json'},
+						body: JSON.stringify(data)
+					}).then(r => r.json()).then(res => {
+						console.log('Server response:', res);
+						// show success UI / redirect
+					}).catch(err => {
+						showError('Failed to send registration. Try again later.');
+						console.error(err);
+					});
+					*/
+
+					// For demo: reset form (optional)
+					// form.reset();
+				});
+			})();
+		</script>
+	</body>
+</html>
+</head>
+
+<body>
+  
+</body>
+
+</html>
