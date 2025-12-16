@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas 4 - Slideshow</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h2>Slideshow</h2>
+
+<img id="slide" src="1.jpg" width="300"><br><br>
+
+<button id="prev">Prev</button>
+<button id="next">Next</button>
+
+<script>
+let gambar = ["1.jpg", "2.jpg", "3.jpg"];
+let index = 0;
+
+$("#next").click(function(){
+    $("#slide").fadeOut(function(){
+        index = (index + 1) % gambar.length;
+        $("#slide").attr("src", gambar[index]).fadeIn();
+    });
+});
+
+$("#prev").click(function(){
+    $("#slide").fadeOut(function(){
+        index = (index - 1 + gambar.length) % gambar.length;
+        $("#slide").attr("src", gambar[index]).fadeIn();
+    });
+});
+</script>
+
+</body>
+</html>

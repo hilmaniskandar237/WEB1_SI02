@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas 1 - Biodata</title>
+</head>
+<body>
+
+<h2>Biodata Mahasiswa</h2>
+
+<div id="biodata">
+    <p id="nama">Nama: Hilman Nabil I</p>
+    <p id="nim">NIM: 0110125059</p>
+    <p id="prodi">Program Studi: Teknik Informatika</p>
+    <img id="foto" src="poto1.jpeg" width="150">
+</div>
+
+<button onclick="ubahNama()">Ubah Nama</button>
+<button onclick="ubahProdi()">Ubah Program Studi</button>
+<button onclick="gantiFoto()">Ganti Foto</button>
+<button onclick="sembunyi()">Sembunyikan Biodata</button>
+<button onclick="tampil()">Tampilkan Biodata</button>
+
+<script>
+function ubahNama() {
+    document.getElementById("nama").innerHTML = "Nama: Nama Baru";
+}
+
+function ubahProdi() {
+    document.getElementById("prodi").innerHTML = "Program Studi: Sistem Informasi";
+}
+
+function gantiFoto() {
+    document.getElementById("foto")
+        .setAttribute("src", "poto2.jpg");
+}
+
+function sembunyi() {
+    document.getElementById("biodata").style.display = "none";
+}
+
+function tampil() {
+    document.getElementById("biodata").style.display = "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas 5 - Notifikasi</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<button id="tampil">Tampilkan Notifikasi</button>
+
+<div id="notif" style="display:none; padding:15px; color:white;">
+    Ini adalah notifikasi
+</div>
+
+<script>
+$("#tampil").click(function(){
+    $("#notif")
+        .css("background","green")
+        .fadeIn()
+        .slideDown()
+        .delay(3000)
+        .slideUp()
+        .fadeOut();
+});
+</script>
+
+</body>
+</html>

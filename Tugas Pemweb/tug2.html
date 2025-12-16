@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas 2 - To Do List</title>
+</head>
+<body>
+
+<h2>To-Do List</h2>
+
+<input type="text" id="todo">
+<button onclick="tambah()">Tambah</button>
+<button onclick="hapus()">Hapus Terakhir</button>
+
+<ul id="list"></ul>
+
+<script>
+function tambah() {
+    let item = document.createElement("li");
+    item.innerHTML = document.getElementById("todo").value;
+    document.getElementById("list").appendChild(item);
+}
+
+function hapus() {
+    let list = document.getElementById("list");
+    if (list.children.length > 0) {
+        list.removeChild(list.lastChild);
+    }
+}
+</script>
+
+</body>
+</html>

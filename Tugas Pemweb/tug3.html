@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas 3 - FAQ</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h2>FAQ Seputar Anime</h2>
+
+<p class="pertanyaan">Apa itu anime?</p>
+<p class="jawaban">Anime adalah animasi yang berasal dari Jepang.</p>
+
+<p class="pertanyaan">Apa perbedaan anime dan kartun?</p>
+<p class="jawaban">Anime memiliki gaya visual dan cerita yang lebih beragam.</p>
+
+<p class="pertanyaan">Apa itu genre shounen?</p>
+<p class="jawaban">Shounen adalah genre anime yang ditujukan untuk remaja laki-laki.</p>
+
+<p class="pertanyaan">Apa itu genre isekai?</p>
+<p class="jawaban">Isekai adalah genre tentang karakter yang berpindah ke dunia lain.</p>
+
+<p class="pertanyaan">Apa itu anime ongoing?</p>
+<p class="jawaban">Anime ongoing adalah anime yang masih tayang mingguan.</p>
+
+<script>
+$(document).ready(function(){
+
+    $(".jawaban").hide();
+
+    $(".pertanyaan").click(function(){
+        $(this).next(".jawaban").toggle();
+    });
+
+    $(".pertanyaan").hover(
+        function(){
+            $(this).css("color","blue");
+        },
+        function(){
+            $(this).css("color","black");
+        }
+    );
+
+});
+</script>
+
+</body>
+</html>
+
